@@ -1,0 +1,492 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script>
+    function menuFuntion(a) {
+        var a
+        var w = document.getElementById("Detail_Lab");
+        var x = document.getElementById("book_Lab");
+        var y = document.getElementById("wait_Lab");
+        var z = document.getElementById("notcon_Lab");
+        var v = document.getElementById("list_Lab");
+        switch (a) {
+            case "1":
+                w.style.display = "block";
+                x.style.display = "none";
+                y.style.display = "none";
+                z.style.display = "none";
+                v.style.display = "none";
+                break;
+            case "2":
+                w.style.display = "none";
+                x.style.display = "block";
+                y.style.display = "none";
+                z.style.display = "none";
+                v.style.display = "none";
+                break;
+            case "3":
+                w.style.display = "none";
+                x.style.display = "none";
+                y.style.display = "block";
+                z.style.display = "none";
+                v.style.display = "none";
+                break;
+            case "4":
+                w.style.display = "none";
+                x.style.display = "none";
+                y.style.display = "none";
+                z.style.display = "block";
+                v.style.display = "none";
+                break;
+            case "5":
+                w.style.display = "none";
+                x.style.display = "none";
+                y.style.display = "none";
+                z.style.display = "none";
+                v.style.display = "block";
+                break;
+            default:
+
+        }
+
+    }
+</script>
+
+<div class="Boxmenuuser">
+    
+    <center><img src="https://i0.wp.com/iceast.kmitl.ac.th/2021/wp-content/uploads/2020/11/logo-go.png" style="max-width: 70%;"></center>
+    <ul>
+ 
+
+        <li><a href="#" onclick="menuFuntion('1')">สวัสดี @User.Identity.Name</li>
+        <li><a href="#div1" onclick="menuFuntion('1')">รายละเอียดห้องปฏิบัติการ</a></li>
+        <li><a href="#div2" onclick="menuFuntion('2')">จองห้องปฏิบัติการ</a></li>
+        <li><a href="#div3" onclick="menuFuntion('3')">รายการจองรออนุมัติ</a></li>
+        <li><a href="#div2" onclick="menuFuntion('4')">รายการจองไม่อนุมัติ</a></li>
+        <li><a href="#div3" onclick="menuFuntion('5')">สถานะการจอง</a></li>
+        <li style="bottom:5%"><a href="/Home/Logout">ออกจากระบบ</a></li>
+    </ul>
+
+
+</div>
+<div class="Box">
+    <div style="display:block;" id="Detail_Lab">
+        <h1>รายละเอียดห้องปฏิบัติการ</h1>
+        <br />
+        <center>
+            <table border="1" style="width: 80%">
+                <tr style="background-color: #cecece;height:50px">
+                    <th width="30%">ชื่อห้อง</th>
+                    <th>รายละเอียดห้อง</th>
+                </tr>
+                <tr style="height:50px" valign="top">
+                    <td>LAB1</td>
+                    <td>เก็บอุปกรณ์สำหรับบัดกรี</td>
+                </tr>
+
+                <tr style="height:50px" valign="top">
+                    <td>LAB2</td>
+                    <td>เก็บอุปกรณ์เครื่องเขียน</td>
+                </tr>
+                <tr style="height:50px" valign="top">
+                    <td>LAB3</td>
+                    <td>เก็บอุปกรณ์ประเภทเครื่องวัดต่าง ๆ</td>
+                </tr>
+                <tr style="height:50px" valign="top">
+                    <td>LAB4</td>
+                    <td>เก็บอุปกรณ์ประเภทสว่านต่าง ๆ</td>
+                </tr>
+                <tr style="height:50px" valign="top">
+                    <td>LAB5</td>
+                    <td>เก็บอุปกรณ์ประเภทค้อนต่าง ๆ </td>
+                </tr>
+            </table>
+        </center>
+    </div>
+
+    <div style="display:none" id="book_Lab">
+
+        <span class="block_lab"><a href="#1">LAB1</a></span>
+        <span class="block_lab"><a href="#1">LAB2</a></span>
+        <span class="block_lab"><a href="#1">LAB3</a></span>
+        <span class="block_lab"><a href="#1">LAB4</a></span>
+        <span class="block_lab"><a href="#1">LAB5</a></span>
+        <br />
+        <br />
+        <br />
+        <br />
+        <form action='/Home/Show' method='POST'>
+            Enter a date: <input type='date' name='date' id='date' />
+            <!--<button type="submit" >ค้นหา</button>-->
+        </form>
+
+        <center>
+            <br />
+            <table border="1" style="width: 80%">
+                <tr style="background-color: #cecece;height:50px">
+                    <th>เวลา</th>
+                    <th>อุปกรณ์</th>
+                    <th>จำนวน</th>
+                    <th>สถานะ</th>
+                    <th>จอง</th>
+                </tr>
+                <tr valign="top">
+                    <td align="center">08.00-09.00</td>
+                    <td>อุปกรณ์สำหรับบัดกรี</td>
+                    <td>20</td>
+                    <td>ว่าง</td>
+                    <td align="center"><button style="background-color:#56baed;color:#fff;width:80%;height:50px" onclick="Book('08.00-09.00')">จอง</button></td>
+                </tr>
+                <tr valign="top">
+                    <td align="center">09.00-10.00</td>
+                    <td>อุปกรณ์สำหรับบัดกรี</td>
+                    <td>20</td>
+                    <td>ว่าง</td>
+                    <td align="center"><button style="background-color:#56baed;color:#fff;width:80%;height:50px" onclick="Book('09.00-10.00')">จอง</button></td>
+                </tr>
+                <tr valign="top">
+                    <td align="center">10.00-11.00</td>
+                    <td>อุปกรณ์สำหรับบัดกรี</td>
+                    <td>20</td>
+                    <td>ว่าง</td>
+                    <td align="center"><button style="background-color:#56baed;color:#fff;width:80%;height:50px" onclick="Book('10.00-11.00')">จอง</button></td>
+                </tr>
+                <tr valign="top">
+                    <td align="center">11.00-12.00</td>
+                    <td>อุปกรณ์สำหรับบัดกรี</td>
+                    <td>20</td>
+                    <td>ว่าง</td>
+                    <td align="center"><button style="background-color:#56baed;color:#fff;width:80%;height:50px" onclick="Book('11.00-12.00')">จอง</button></td>
+                </tr>
+                <tr valign="top">
+                    <td align="center">12.00-13.00</td>
+                    <td>อุปกรณ์สำหรับบัดกรี</td>
+                    <td>20</td>
+                    <td>ว่าง</td>
+                    <td align="center"><button style="background-color:#56baed;color:#fff;width:80%;height:50px" onclick="Book('12.00-13.00')">จอง</button></td>
+                </tr>
+                <tr valign="top">
+                    <td align="center">13.00-14.00</td>
+                    <td>อุปกรณ์สำหรับบัดกรี</td>
+                    <td>20</td>
+                    <td>ว่าง</td>
+                    <td align="center"><button style="background-color:#56baed;color:#fff;width:80%;height:50px" onclick="Book('13.00-14.00')">จอง</button></td>
+                </tr>
+                <tr valign="top">
+                    <td align="center">14.00-15.00</td>
+                    <td>อุปกรณ์สำหรับบัดกรี</td>
+                    <td>20</td>
+                    <td>ว่าง</td>
+                    <td align="center"><button style="background-color:#56baed;color:#fff;width:80%;height:50px" onclick="Book('14.00-15.00')">จอง</button></td>
+                </tr>
+                <tr valign="top">
+                    <td align="center">15.00-16.00</td>
+                    <td>อุปกรณ์สำหรับบัดกรี</td>
+                    <td>20</td>
+                    <td>ว่าง</td>
+                    <td align="center"><button style="background-color:#56baed;color:#fff;width:80%;height:50px" onclick="Book('15.00-16.00')">จอง</button></td>
+                </tr>
+                <tr valign="top">
+                    <td align="center">16.00-17.00</td>
+                    <td>อุปกรณ์สำหรับบัดกรี</td>
+                    <td>20</td>
+                    <td>ว่าง</td>
+                    <td align="center"><button style="background-color:#56baed;color:#fff;width:80%;height:50px" onclick="Book('16.00-17.00')">จอง</button></td>
+                </tr>
+                <tr valign="top">
+                    <td align="center">17.00-18.00</td>
+                    <td>อุปกรณ์สำหรับบัดกรี</td>
+                    <td>20</td>
+                    <td>ว่าง</td>
+                    <td align="center"><button style="background-color:#56baed;color:#fff;width:80%;height:50px" onclick="Book('17.00-18.00')">จอง</button></td>
+                </tr>
+            </table>
+        </center>
+    </div>
+    <div style="display:none" id="wait_Lab">
+        <h1>รายการจองรออนุมัติ</h1>
+        <center>
+            <table border="1" style="width: 80%">
+                <tr style="background-color: #cecece;height:50px">
+                    <th>ใบการจอง</th>
+                    <th>วันเวลาที่จอง</th>
+                    <th>ห้องปฏิบัติการ</th>
+                    <th>อุปกรณ์เสริม</th>
+                    <th>ห้อง</th>
+                    <th>สถานะ</th>
+                    <th>ยกเลิกการจอง</th>
+                </tr>
+                @{
+                    if (Model != null)
+                    {
+                        foreach (var Data in Model)
+                        {
+                            if(@Data.Status=="unconfirmed")
+                            {
+                                <tr style="height:200px" valign="top">
+                                    <td>@Data.id</td>
+                                    <td>@Data.Date</td>
+                                    <td>@Data.Time</td>
+                                    <td>@Data.User_id</td>
+                                    <td>Lab-@Data.Room_id</td>
+                                    <td>@Data.Status</td>
+                                    <td align="center">
+                                        <form asp-area="" asp-controller="Home" asp-action="Cancel">
+                                            <input type="hidden" value="@Data.id" name="did" />
+                                            <button type="submit" style="background-color:#e95b5b;color:#fff;width:80%;height:50px">ยกเลิกการจอง</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                }
+
+                            }
+                        }
+
+                    }
+            </table>
+        </center>
+    </div>
+    <div style="display:none" id="notcon_Lab">
+        <h1>รายการจองไม่อนุมัติ</h1>
+        <center>
+            <table border="1" style="width: 80%">
+                <tr style="background-color: #cecece;height:50px">
+                    <th>ใบการจอง</th>
+                    <th>วันเวลาที่จอง</th>
+                    <th>ห้องปฏิบัติการ</th>
+                    <th>อุปกรณ์เสริม</th>
+                    <th>ห้อง</th>
+                    <th>สถานะ</th>
+                </tr>
+
+                @{
+                    if (Model != null)
+                    {
+                        foreach (var Data in Model)
+                        {
+                            if (@Data.Status == "cancelled")
+                            {
+                            <tr style="height:200px" valign="top">
+                                <td>@Data.id</td>
+                                <td>@Data.Date</td>
+                                <td>@Data.Time</td>
+                                <td>@Data.User_id</td>
+                                <td>LAB-@Data.Room_id</td>
+                                <td>@Data.Status</td>
+
+                            </tr>
+                                }
+                            }
+                        }
+
+                    }
+
+
+            </table>
+        </center>
+    </div>
+    <div style="display:none" id="list_Lab">
+        <h1>สถานะการจอง</h1>
+        <center>
+            <table border="1" style="width: 80%">
+                <tr style="background-color: #cecece;height:50px">
+                    <th>ใบการจอง</th>
+                    <th>วันเวลาที่จอง</th>
+                    <th>ห้องปฏิบัติการ</th>
+                    <th>อุปกรณ์เสริม</th>
+                    <th>ห้อง</th>
+                    <th>ยกเลิกการจอง</th>
+                </tr>
+            
+
+                    @{
+                        if (Model != null)
+                        {
+                            foreach (var Data in Model)
+                            {
+                                if (@Data.Status == "confirmed")
+                                {
+                                    <tr style="height:200px" valign="top">
+                                        <td>@Data.id</td>
+                                        <td>@Data.Date</td>
+                                        <td>@Data.Time</td>
+                                        <td>@Data.User_id</td>
+                                        <td>LAB-@Data.Room_id</td>
+                                        <td align="center">
+                                            <form asp-area="" asp-controller="Home" asp-action="Cancel">
+                                                <input type="hidden" value="@Data.id" name="did"/>
+                                                <button type="submit" style="background-color:#e95b5b;color:#fff;width:80%;height:50px">ยกเลิกการจอง</button>
+                                            </form>
+                                        </td>
+
+
+                                    </tr>
+                            }
+                        }
+                    }
+
+                    }
+
+ </tr>
+                </table>
+        </center>
+    </div>
+
+    
+</div>
+
+<script>
+    function Book(time) {
+        var r = confirm("ยืนยันการจอง");
+        if (r == true) {
+             let user = "@Context.User.Identity.Name";
+            let room = "1";
+            let date = document.getElementById("date").value;
+
+            const uri = 'Home/Book';
+            const item = {
+                date: date,
+                time: time,
+                User_id: user,
+                Room_id: room
+            };
+
+            fetch(uri, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(item)
+            })
+                .then(response => response.json())
+                .then(() => {
+                    getItems();
+                    addNameTextbox.value = '';
+                })
+                .catch(error => console.error('Unable.', error));
+            alert("การจองสำเร็จ");
+        } else {
+            alert("การจองยกเลิก");
+        }
+        @*let user = "@Context.User.Identity.Name";
+        let room = "1";
+        let date = document.getElementById("date").value;
+
+        const uri = 'Home/Book';
+        const item = {
+            date: date,
+            time: time,
+            User_id: user,
+            Room_id: room
+        };
+
+        fetch(uri, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+        })
+            .then(response => response.json())
+            .then(() => {
+                getItems();
+                addNameTextbox.value = '';
+            })
+            .catch(error => console.error('Unable to add item.', error));*@
+
+
+
+
+
+
+
+        //var url = "/Home/Book";
+
+        //var xhr = new XMLHttpRequest();
+        //xhr.open("POST", url);
+
+        //xhr.setRequestHeader("Accept", "application/json");
+        //xhr.setRequestHeader("Content-Type", "application/json");
+
+        //xhr.onreadystatechange = function () {
+        //    if (xhr.readyState === 4) {
+        //        console.log(xhr.status);
+        //        console.log(xhr.responseText);
+        //    }
+        //};
+
+        //var data = `{
+        //    date: "78912",
+        //    time: "Jason Sweet",
+        //    user: 1,
+        //    room: "18.00"
+        //}`;
+
+        //xhr.send(data);
+
+        //let dataa = { date: date, time: time, room: room, user: user };
+
+        //fetch("/Home/Book", {
+        //    method: "POST",
+        //    body: JSON.stringify(dataa)
+        //});
+       
+        //fetch('/Home/Book/', {
+        //    method: 'post',
+        //    body: JSON.stringify(dataa)
+        //}).then(function (response) {
+        //    return response.json();
+        //});
+        
+
+        //let data = { date: date, time: time, room: room, user: user };
+        //var form = $('<form></form>');
+
+        //form.attr("method", "post");
+        //form.attr("action", "/Home/Book");
+
+        //$.each(dataa, function (key, value) {
+        //    if (typeof value == 'object' || typeof value == 'array') {
+        //        $.each(value, function (subkey, subvalue) {
+        //            var field = $('<input />');
+        //            field.attr("type", "hidden");
+        //            field.attr("name", key + '[]');
+        //            field.attr("value", subvalue);
+        //            form.append(field);
+        //            alert('key:', key);
+        //            alert('value:', value);
+        //        });
+        //    } else {
+        //        var field = $('<input />');
+        //        field.attr("type", "hidden");
+        //        field.attr("name", key);
+        //        field.attr("value", value);
+        //        form.append(field);
+
+        //    }
+        //});
+
+        //$(document.body).append(form);
+        //form.submit();
+        
+
+        ////let data = { date: date, time: time, room: room, user: user };
+       
+
+        //fetch("/Home/Book", {
+        //    method: "POST",
+        //    body: JSON.stringify(data)
+        //}).then(response => response.json()).then(res => {
+        //    console.log("Request complete! response:", res);
+        //});
+
+
+       
+
+
+
+    }
+</script>
